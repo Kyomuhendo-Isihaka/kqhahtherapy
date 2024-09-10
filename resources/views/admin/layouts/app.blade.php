@@ -29,6 +29,11 @@
 
   @include('admin.layouts.header')
     <div class="relative min-h-screen group-data-[sidebar-size=sm]:min-h-sm">
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
         @yield('content')
 

@@ -1,8 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <div
-        class="group-data-[sidebar-size=lg]:ltr:md:ml-vertical-menu group-data-[sidebar-size=lg]:rtl:md:mr-vertical-menu group-data-[sidebar-size=md]:ltr:ml-vertical-menu-md group-data-[sidebar-size=md]:rtl:mr-vertical-menu-md group-data-[sidebar-size=sm]:ltr:ml-vertical-menu-sm group-data-[sidebar-size=sm]:rtl:mr-vertical-menu-sm pt-[calc(theme('spacing.header')_*_1)] pb-[calc(theme('spacing.header')_*_0.8)] px-4 group-data-[navbar=bordered]:pt-[calc(theme('spacing.header')_*_1.3)] group-data-[navbar=hidden]:pt-0 group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl group-data-[layout=horizontal]:px-0 group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:ltr:md:ml-auto group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:rtl:md:mr-auto group-data-[layout=horizontal]:md:pt-[calc(theme('spacing.header')_*_1.6)] group-data-[layout=horizontal]:px-3 group-data-[layout=horizontal]:group-data-[navbar=hidden]:pt-[calc(theme('spacing.header')_*_0.9)]">
+    <div class="group-data-[sidebar-size=lg]:ltr:md:ml-vertical-menu group-data-[sidebar-size=lg]:rtl:md:mr-vertical-menu group-data-[sidebar-size=md]:ltr:ml-vertical-menu-md group-data-[sidebar-size=md]:rtl:mr-vertical-menu-md group-data-[sidebar-size=sm]:ltr:ml-vertical-menu-sm group-data-[sidebar-size=sm]:rtl:mr-vertical-menu-sm pt-[calc(theme('spacing.header')_*_1)] pb-[calc(theme('spacing.header')_*_0.8)] px-4 group-data-[navbar=bordered]:pt-[calc(theme('spacing.header')_*_1.3)] group-data-[navbar=hidden]:pt-0 group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl group-data-[layout=horizontal]:px-0 group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:ltr:md:ml-auto group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:rtl:md:mr-auto group-data-[layout=horizontal]:md:pt-[calc(theme('spacing.header')_*_1.6)] group-data-[layout=horizontal]:px-3 group-data-[layout=horizontal]:group-data-[navbar=hidden]:pt-[calc(theme('spacing.header')_*_0.9)]">
         <div class="container-fluid group-data-[content=boxed]:max-w-boxed mx-auto">
 
             <div class="flex flex-col gap-2 py-4 md:flex-row md:items-center print:hidden">
@@ -20,129 +19,76 @@
                 </ul>
             </div>
             <div class="grid grid-cols-1 xl:grid-cols-12 gap-x-5">
-                <div class="xl:col-span-9">
+                <div class="xl:col-span-12">
                     <div class="card">
                         <div class="card-body">
                             <h6 class="mb-4 text-15">Create Product</h6>
 
-                            <form action="#!">
+                            <form action="{{ route('product.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="category" value="{{ $category }}" id="">
                                 <div class="grid grid-cols-1 gap-5 lg:grid-cols-2 xl:grid-cols-12">
                                     <div class="xl:col-span-6">
                                         <label for="productNameInput"
-                                            class="inline-block mb-2 text-base font-medium">Product Title</label>
-                                        <input type="text" id="productNameInput"
+                                            class="inline-block mb-2 text-base font-medium">Product Name</label>
+                                        <input type="text" name="name" id="productNameInput"
                                             class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                                            placeholder="Product title" required="">
+                                            placeholder="Product name" required>
                                     </div><!--end col-->
 
-                                    <div class="xl:col-span-6">
-                                        <label for="productCodeInput"
-                                            class="inline-block mb-2 text-base font-medium">Product Code</label>
-                                        <input type="text" id="productCodeInput"
-                                            class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
-                                            placeholder="Product Code" value="TWT145015" disabled="" required="">
-                                    </div><!--end col-->
+
 
 
                                     @if ($category == 'shirts')
                                         <div class="xl:col-span-6">
                                             <label for="qualityInput" class="inline-block mb-2 text-base font-medium">Colors
-                                                Variant</label>
-                                            <div class="flex flex-wrap items-center gap-2">
-                                                <div>
-                                                    <input id="selectColor1"
-                                                        class="inline-block align-middle border rounded-sm appearance-none cursor-pointer size-5 bg-sky-500 border-sky-500 checked:bg-sky-500 checked:border-sky-500 disabled:opacity-75 disabled:cursor-default"
-                                                        type="checkbox" value="color1" name="selectColor">
-                                                </div>
-                                                <div>
-                                                    <input id="selectColor2"
-                                                        class="inline-block align-middle bg-orange-500 border border-orange-500 rounded-sm appearance-none cursor-pointer size-5 checked:bg-orange-500 checked:border-orange-500 disabled:opacity-75 disabled:cursor-default"
-                                                        type="checkbox" value="color2" name="selectColor" checked="">
-                                                </div>
-                                                <div>
-                                                    <input id="selectColor3"
-                                                        class="inline-block align-middle bg-green-500 border border-green-500 rounded-sm appearance-none cursor-pointer size-5 checked:bg-green-500 checked:border-green-500 disabled:opacity-75 disabled:cursor-default"
-                                                        type="checkbox" value="color3" name="selectColor">
-                                                </div>
-                                                <div>
-                                                    <input id="selectColor4"
-                                                        class="inline-block align-middle bg-purple-500 border border-purple-500 rounded-sm appearance-none cursor-pointer size-5 checked:bg-purple-500 checked:border-purple-500 disabled:opacity-75 disabled:cursor-default"
-                                                        type="checkbox" value="color4" name="selectColor">
-                                                </div>
-                                                <div>
-                                                    <input id="selectColor5"
-                                                        class="inline-block align-middle bg-yellow-500 border border-yellow-500 rounded-sm appearance-none cursor-pointer size-5 checked:bg-yellow-500 checked:border-yellow-500 disabled:opacity-75 disabled:cursor-default"
-                                                        type="checkbox" value="color5" name="selectColor">
-                                                </div>
-                                                <div>
-                                                    <input id="selectColor6"
-                                                        class="inline-block align-middle bg-red-500 border border-red-500 rounded-sm appearance-none cursor-pointer size-5 checked:bg-red-500 checked:border-red-500 disabled:opacity-75 disabled:cursor-default"
-                                                        type="checkbox" value="color6" name="selectColor">
-                                                </div>
-                                                <div>
-                                                    <input id="selectColor7"
-                                                        class="inline-block align-middle border rounded-sm appearance-none cursor-pointer size-5 bg-slate-500 border-slate-500 checked:bg-slate-500 checked:border-slate-500 disabled:opacity-75 disabled:cursor-default"
-                                                        type="checkbox" value="color7" name="selectColor">
-                                                </div>
-                                                <div>
-                                                    <input id="selectColor8"
-                                                        class="inline-block align-middle border rounded-sm appearance-none cursor-pointer size-5 bg-slate-900 border-slate-900 checked:bg-slate-900 checked:border-slate-900 disabled:opacity-75 disabled:cursor-default"
-                                                        type="checkbox" value="color7" name="selectColor">
-                                                </div>
-                                                <div>
-                                                    <input id="selectColor9"
-                                                        class="inline-block align-middle border rounded-sm appearance-none cursor-pointer size-5 bg-slate-200 border-slate-200 checked:bg-slate-200 checked:border-slate-200 disabled:opacity-75 disabled:cursor-default"
-                                                        type="checkbox" value="color7" name="selectColor">
-                                                </div>
-                                                <div>
-                                                    <a href="#!"
-                                                        class="flex items-center justify-center border rounded-sm size-5 border-slate-200 dark:border-zink-500"><i
-                                                            data-lucide="pencil" class="w-3 h-3"></i></a>
-                                                </div>
-                                            </div>
+                                                </label>
+                                                <input name="color" type="text" id="productNameInput"
+                                                class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
+                                                placeholder="Color" >
                                         </div><!--end col-->
                                         <div class="xl:col-span-6">
                                             <div class="inline-block mb-2 text-base font-medium">Size</div>
                                             <div class="flex flex-wrap items-center gap-2">
                                                 <div>
                                                     <input id="selectSizeXS" class="hidden peer" type="checkbox"
-                                                        value="XS" name="selectSize">
+                                                        value="XS" name="size[]">
                                                     <label for="selectSizeXS"
                                                         class="flex items-center justify-center text-xs border rounded-md cursor-pointer size-10 border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/15 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">XS</label>
                                                 </div>
                                                 <div>
                                                     <input id="selectSizeS" class="hidden peer" type="checkbox"
-                                                        value="S" name="selectSize" checked="">
+                                                        value="S" name="size[]" checked="">
                                                     <label for="selectSizeS"
                                                         class="flex items-center justify-center text-xs border rounded-md cursor-pointer size-10 border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/15 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">S</label>
                                                 </div>
                                                 <div>
                                                     <input id="selectSizeM" class="hidden peer" type="checkbox"
-                                                        value="M" name="selectSize">
+                                                        value="M" name="size[]">
                                                     <label for="selectSizeM"
                                                         class="flex items-center justify-center text-xs border rounded-md cursor-pointer size-10 border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/15 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">M</label>
                                                 </div>
                                                 <div>
                                                     <input id="selectSizeL" class="hidden peer" type="checkbox"
-                                                        value="L" name="selectSize">
+                                                        value="L" name="size[]">
                                                     <label for="selectSizeL"
                                                         class="flex items-center justify-center text-xs border rounded-md cursor-pointer size-10 border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/15 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">L</label>
                                                 </div>
                                                 <div>
                                                     <input id="selectSizeXL" class="hidden peer" type="checkbox"
-                                                        value="XL" name="selectSize">
+                                                        value="XL" name="size[]">
                                                     <label for="selectSizeXL"
                                                         class="flex items-center justify-center text-xs border rounded-md cursor-pointer size-10 border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/15 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">XL</label>
                                                 </div>
                                                 <div>
                                                     <input id="selectSize2XL" class="hidden peer" type="checkbox"
-                                                        value="2XL" name="selectSize">
+                                                        value="2XL" name="size[]">
                                                     <label for="selectSize2XL"
                                                         class="flex items-center justify-center text-xs border rounded-md cursor-pointer size-10 border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/15 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">2XL</label>
                                                 </div>
                                                 <div>
                                                     <input id="selectSize3XL" class="hidden peer" type="checkbox"
-                                                        value="3XL" name="selectSize">
+                                                        value="3XL" name="size[]">
                                                     <label for="selectSize3XL"
                                                         class="flex items-center justify-center text-xs border rounded-md cursor-pointer size-10 border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/15 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">3XL</label>
                                                 </div>
@@ -156,7 +102,7 @@
                                         <div
                                             class="flex items-center justify-center bg-white border border-dashed rounded-md cursor-pointer dropzone border-slate-300 dark:bg-zink-700 dark:border-zink-500 dropzone2">
                                             <div class="fallback">
-                                                <input name="file" type="file" multiple="multiple">
+                                                <input name="file" name="image" type="file" multiple="multiple">
                                             </div>
                                             <div class="w-full py-5 text-lg text-center dz-message needsclick">
                                                 <div class="mb-3">
@@ -200,11 +146,12 @@
                                             </li>
                                         </ul>
                                     </div>
+
                                     <div class="lg:col-span-2 xl:col-span-12">
                                         <div>
                                             <label for="productDescription"
                                                 class="inline-block mb-2 text-base font-medium">Description</label>
-                                            <textarea
+                                            <textarea name="description"
                                                 class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                                                 id="productDescription" placeholder="Enter Description" rows="5"></textarea>
                                         </div>
@@ -214,7 +161,7 @@
                                         <div class="xl:col-span-4">
                                             <label for="productPrice"
                                                 class="inline-block mb-2 text-base font-medium">Price</label>
-                                            <input type="number" id="productPrice"
+                                            <input name="productPrices[]" type="number" id="productPrice"
                                                 class="form-input border-slate-200 dark:border-zink-500 focus:outline-none focus:border-custom-500 disabled:bg-slate-100 dark:disabled:bg-zink-600 disabled:border-slate-300 dark:disabled:border-zink-500 dark:disabled:text-zink-200 disabled:text-slate-500 dark:text-zink-100 dark:bg-zink-700 dark:focus:border-custom-800 placeholder:text-slate-400 dark:placeholder:text-zink-200"
                                                 placeholder="$0.00" required="">
                                         </div>
@@ -222,18 +169,19 @@
                                         <div class="xl:col-span-4">
                                             <label for="productPrice"
                                                 class="inline-block mb-2 text-base font-medium">Choose Prices</label><br>
-                                            <input type="checkbox" id="productPrice" class=""> 2oz-$35 &nbsp; &nbsp; &nbsp;
+                                                @foreach ($prices as $p)
 
-                                            <input type="checkbox" id="productPrice" class=""> 2oz-$35 &nbsp; &nbsp; &nbsp;
+                                                <input name="productPrices[]" type="checkbox" id="productPrice" value="{{ $p->id }}" class=""> {{ $p->milliliters }}-${{ $p->price }} &nbsp; &nbsp; &nbsp;
+                                                @endforeach
 
-                                            <input type="checkbox" id="productPrice" class=""> 2oz-$35 &nbsp; &nbsp; &nbsp;
+
 
 
                                         </div>
                                     @endif
 
 
-                                </div><!--end grid-->
+                                </div>
                                 <div class="flex justify-end gap-2 mt-4">
 
                                     <button type="submit"
@@ -243,12 +191,12 @@
                                 </div>
                             </form>
                         </div>
-                    </div><!--end card-->
-                </div><!--end col-->
+                    </div>
+                </div>
 
-            </div><!--end grid-->
+            </div>
 
         </div>
-        <!-- container-fluid -->
+
     </div>
 @endsection

@@ -14,127 +14,93 @@
                     <div class="2xl:col-span-9">
                         <div class="flex flex-wrap items-center gap-2">
                             <p class="grow">Products</p>
-                            <div class="flex gap-2 shrink-0 items-cente">
 
-                                <button type="button" id="listView"
-                                    class="flex items-center justify-center w-[37.5px] h-[37.5px] p-0 text-sky-500 btn bg-sky-100 hover:text-white hover:bg-sky-600 focus:text-white focus:bg-sky-600 [&.active]:text-white [&.active]:bg-sky-600 dark:bg-sky-500/20 dark:text-sky-400 dark:hover:bg-sky-500 dark:hover:text-white dark:focus:bg-sky-500 dark:focus:text-white dark:[&.active]:bg-sky-500 dark:[&.active]:text-white dark:ring-sky-400/20"><i
-                                        data-lucide="list" class="size-4"></i></button>
-                                <button type="button" id="gridView"
-                                    class="flex items-center justify-center w-[37.5px] h-[37.5px] p-0 text-sky-500 btn bg-sky-100 hover:text-white hover:bg-sky-600 focus:text-white focus:bg-sky-600 [&.active]:text-white [&.active]:bg-sky-600 dark:bg-sky-500/20 dark:text-sky-400 dark:hover:bg-sky-500 dark:hover:text-white dark:focus:bg-sky-500 dark:focus:text-white dark:[&.active]:bg-sky-500 dark:[&.active]:text-white dark:ring-sky-400/20 active"><i
-                                        data-lucide="layout-grid" class="size-4"></i></button>
-                            </div>
                         </div>
 
 
                         <div class="grid grid-cols-1 mt-5 md:grid-cols-4 [&.gridView]:grid-cols-1 xl:grid-cols-4 group [&.gridView]:xl:grid-cols-1 gap-x-5"
                             id="cardGridView">
 
-                            <div class="card md:group-[.gridView]:flex relative">
-                                <div class="relative group-[.gridView]:static p-8 group-[.gridView]:p-5">
-                                    <a href="#!"
-                                        class="absolute group/item toggle-button top-6 ltr:right-6 rtl:left-6"><i
-                                            data-lucide="heart"
-                                            class="size-5 text-slate-400 fill-slate-200 transition-all duration-150 ease-linear dark:text-zink-200 dark:fill-zink-600 group-[.active]/item:text-red-500 dark:group-[.active]/item:text-red-500 group-[.active]/item:fill-red-200 dark:group-[.active]/item:fill-red-500/20 group-hover/item:text-red-500 dark:group-hover/item:text-red-500 group-hover/item:fill-red-200 dark:group-hover/item:fill-red-500/20"></i></a>
+                            @foreach ($products as $product)
+                                <div class="card md:group-[.gridView]:flex relative">
+                                                                      @if ($product->category == 'oils')
+                                        <img src="{{ asset('uploads/image11.jpeg') }}" alt="" style="height: 150px">
+                                    @else
+                                        @if ($product->category == 'butters')
+                                            <img src="{{ asset('uploads/image18.jpeg') }}" alt=""
+                                                style="height: 150px">
+                                        @else
+                                            <img src="{{ asset('uploads/22.jpg') }}" alt=""
+                                                style="height: 150px">
+                                        @endif
+                                    @endif
                                     <div
-                                        class="group-[.gridView]:p-3 group-[.gridView]:bg-slate-100 dark:group-[.gridView]:bg-zink-600 group-[.gridView]:inline-block rounded-md">
-                                        <img src="{{ asset('uploads/kqhahtherapy.jpeg') }}" alt=""
-                                            class="group-[.gridView]:h-16">
+                                        class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-3 group-[.gridView]:gap-3 group-[.gridView]:grow">
+                                        <div class="group-[.gridView]:grow text-center">
+                                            <h6
+                                                class="mb-1 truncate transition-all duration-200 ease-linear text-15 hover:text-custom-500">
+                                                <a href="{{ route('product.details', $product->id) }}"
+                                                    class="nav-link">{{ $product->name }}</a>
+                                            </h6>
+
+                                            @php
+                                                $prices = json_decode($product->price, true); //
+                                            @endphp
+
+                                            @if ($product->category == 'shirts')
+                                                @foreach ($prices as $price)
+                                                    <div>
+                                                        $ {{ $price }}
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                            {{-- <div>
+                                                @if (!empty($prices) && is_array(json_decode($prices)))
+                                                    @php
+                                                        $price_ids = json_decode($prices); // Decode the JSON array of price IDs
+                                                        $pricing = \App\Models\Pricing::findOrFail($price_ids[0]); // Fetch the first pricing record
+                                                    @endphp
+                                                    <p>{{ $pricing->milliliters }}ml - ${{ $pricing->price }}</p> <!-- Display the fetched price -->
+                                                @else
+                                                    <p>No price available</p>
+                                                @endif
+                                            </div> --}}
+
+                                            <div>
+                                                @if (!empty($prices) && is_array($prices))
+                                                    @php
+                                                        $pricing = \App\Models\Pricing::findOrFail($prices[0]); // Fetch the first pricing record
+                                                    @endphp
+                                                    <p>{{ $pricing->milliliters }} - ${{ $pricing->price }}</p> <!-- Display the fetched price -->
+                                                @else
+                                                    <p>No price available</p>
+                                                @endif
+                                            </div>
+
+                                            @endif
+
+                                        </div>
+
+                                        <div
+                                            class="flex items-center gap-2 mt-3 group-[.gridView]:mt-0 group-[.gridView]:self-end">
+                                            <button type="button"
+                                                class="w-full bg-dark border-dashed text-white btn border-slate-500 hover:text-slate-500 hover:bg-slate-50 hover:border-slate-600 focus:text-slate-600 focus:bg-slate-50 focus:border-slate-600 active:text-slate-600 active:bg-slate-50 active:border-slate-600 dark:bg-zink-700 dark:text-zink-200 dark:border-zink-400 dark:ring-zink-400/20 dark:hover:bg-zink-600 dark:hover:text-zink-100 dark:focus:bg-zink-600 dark:focus:text-zink-100 dark:active:bg-zink-600 dark:active:text-zink-100"><i
+                                                    data-lucide="shopping-cart"
+                                                    class="inline-block w-3 h-3 leading-none"></i>
+                                                <span class="align-middle">Add to Cart</span></button>
+
+                                        </div>
                                     </div>
                                 </div>
-                                <div
-                                    class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-5 group-[.gridView]:gap-3 group-[.gridView]:grow">
-                                    <div class="group-[.gridView]:grow">
-                                        <h6
-                                            class="mb-1 truncate transition-all duration-200 ease-linear text-15 hover:text-custom-500">
-                                            <a href="{{ route('product.details', 1) }}" class="nav-link">Gucii Oil</a>
-                                        </h6>
+                            @endforeach
 
-                                        <h5 class="mt-4 text-16">$362.21 </h5>
-                                    </div>
-
-                                    <div
-                                        class="flex items-center gap-2 mt-4 group-[.gridView]:mt-0 group-[.gridView]:self-end">
-                                        <button type="button"
-                                            class="w-full bg-dark border-dashed text-white btn border-slate-500 hover:text-slate-500 hover:bg-slate-50 hover:border-slate-600 focus:text-slate-600 focus:bg-slate-50 focus:border-slate-600 active:text-slate-600 active:bg-slate-50 active:border-slate-600 dark:bg-zink-700 dark:text-zink-200 dark:border-zink-400 dark:ring-zink-400/20 dark:hover:bg-zink-600 dark:hover:text-zink-100 dark:focus:bg-zink-600 dark:focus:text-zink-100 dark:active:bg-zink-600 dark:active:text-zink-100"><i
-                                                data-lucide="shopping-cart" class="inline-block w-3 h-3 leading-none"></i>
-                                            <span class="align-middle">Add to Cart</span></button>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card md:group-[.gridView]:flex relative">
-                                <div class="relative group-[.gridView]:static p-8 group-[.gridView]:p-5">
-                                    <a href="#!"
-                                        class="absolute group/item toggle-button top-6 ltr:right-6 rtl:left-6"><i
-                                            data-lucide="heart"
-                                            class="size-5 text-slate-400 fill-slate-200 transition-all duration-150 ease-linear dark:text-zink-200 dark:fill-zink-600 group-[.active]/item:text-red-500 dark:group-[.active]/item:text-red-500 group-[.active]/item:fill-red-200 dark:group-[.active]/item:fill-red-500/20 group-hover/item:text-red-500 dark:group-hover/item:text-red-500 group-hover/item:fill-red-200 dark:group-hover/item:fill-red-500/20"></i></a>
-                                    <div
-                                        class="group-[.gridView]:p-3 group-[.gridView]:bg-slate-100 dark:group-[.gridView]:bg-zink-600 group-[.gridView]:inline-block rounded-md">
-                                        <img src="{{ asset('uploads/kqhahtherapy.jpeg') }}" alt=""
-                                            class="group-[.gridView]:h-16">
-                                    </div>
-                                </div>
-                                <div
-                                    class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-5 group-[.gridView]:gap-3 group-[.gridView]:grow">
-                                    <div class="group-[.gridView]:grow">
-                                        <h6
-                                            class="mb-1 truncate transition-all duration-200 ease-linear text-15 hover:text-custom-500">
-                                            <a href="{{ route('product.details', 1) }}" class="nav-link">Gucii Oil</a>
-                                        </h6>
-
-                                        <h5 class="mt-4 text-16">$362.21 </h5>
-                                    </div>
-
-                                    <div
-                                        class="flex items-center gap-2 mt-4 group-[.gridView]:mt-0 group-[.gridView]:self-end">
-                                        <button type="button"
-                                            class="w-full bg-dark border-dashed text-white btn border-slate-500 hover:text-slate-500 hover:bg-slate-50 hover:border-slate-600 focus:text-slate-600 focus:bg-slate-50 focus:border-slate-600 active:text-slate-600 active:bg-slate-50 active:border-slate-600 dark:bg-zink-700 dark:text-zink-200 dark:border-zink-400 dark:ring-zink-400/20 dark:hover:bg-zink-600 dark:hover:text-zink-100 dark:focus:bg-zink-600 dark:focus:text-zink-100 dark:active:bg-zink-600 dark:active:text-zink-100"><i
-                                                data-lucide="shopping-cart" class="inline-block w-3 h-3 leading-none"></i>
-                                            <span class="align-middle">Add to Cart</span></button>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card md:group-[.gridView]:flex relative">
-                                <div class="relative group-[.gridView]:static p-8 group-[.gridView]:p-5">
-                                    <a href="#!"
-                                        class="absolute group/item toggle-button top-6 ltr:right-6 rtl:left-6"><i
-                                            data-lucide="heart"
-                                            class="size-5 text-slate-400 fill-slate-200 transition-all duration-150 ease-linear dark:text-zink-200 dark:fill-zink-600 group-[.active]/item:text-red-500 dark:group-[.active]/item:text-red-500 group-[.active]/item:fill-red-200 dark:group-[.active]/item:fill-red-500/20 group-hover/item:text-red-500 dark:group-hover/item:text-red-500 group-hover/item:fill-red-200 dark:group-hover/item:fill-red-500/20"></i></a>
-                                    <div
-                                        class="group-[.gridView]:p-3 group-[.gridView]:bg-slate-100 dark:group-[.gridView]:bg-zink-600 group-[.gridView]:inline-block rounded-md">
-                                        <img src="{{ asset('uploads/kqhahtherapy.jpeg') }}" alt=""
-                                            class="group-[.gridView]:h-16">
-                                    </div>
-                                </div>
-                                <div
-                                    class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-5 group-[.gridView]:gap-3 group-[.gridView]:grow">
-                                    <div class="group-[.gridView]:grow">
-                                        <h6
-                                            class="mb-1 truncate transition-all duration-200 ease-linear text-15 hover:text-custom-500">
-                                            <a href="{{ route('product.details', 1) }}" class="nav-link">Gucii Oil</a>
-                                        </h6>
-
-                                        <h5 class="mt-4 text-16">$362.21 </h5>
-                                    </div>
-
-                                    <div
-                                        class="flex items-center gap-2 mt-4 group-[.gridView]:mt-0 group-[.gridView]:self-end">
-                                        <button type="button"
-                                            class="w-full bg-dark border-dashed text-white btn border-slate-500 hover:text-slate-500 hover:bg-slate-50 hover:border-slate-600 focus:text-slate-600 focus:bg-slate-50 focus:border-slate-600 active:text-slate-600 active:bg-slate-50 active:border-slate-600 dark:bg-zink-700 dark:text-zink-200 dark:border-zink-400 dark:ring-zink-400/20 dark:hover:bg-zink-600 dark:hover:text-zink-100 dark:focus:bg-zink-600 dark:focus:text-zink-100 dark:active:bg-zink-600 dark:active:text-zink-100"><i
-                                                data-lucide="shopping-cart" class="inline-block w-3 h-3 leading-none"></i>
-                                            <span class="align-middle">Add to Cart</span></button>
-
-                                    </div>
-                                </div>
-                            </div>
-
+                            {{ $products->links('components.pagination') }}
 
                         </div>
 
                     </div>
-                </div><!--end grid-->
+                </div>
+                <!--end grid-->
 
             </div>
             <!-- container-fluid -->

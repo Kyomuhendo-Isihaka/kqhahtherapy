@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PricingController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Request;
@@ -35,7 +36,9 @@ if (!function_exists('set_active')) {
 
 
 Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'index')->name('login.show');
+    Route::get('/login', 'index')->name('login');
+    Route::post('/admin-login', 'login')->name('admin.login');
+    Route::post('/logout', 'logout')->name('logout');
 });
 
 
@@ -51,7 +54,7 @@ Route::controller(CartController::class)->group(function () {
 });
 
 
-Route::group( ['prefix' => 'admin'],function () {
+Route::group( ['prefix' => 'admin', 'middleware'=>['auth']],function () {
 
         Route::controller(DashboardController::class)->group(function () {
             Route::get('/dashboard', 'index')->name('dashboard');
@@ -65,9 +68,16 @@ Route::group( ['prefix' => 'admin'],function () {
             Route::get('/orders', 'orders')->name('orders');
         });
 
+        Route::controller(PricingController::class)->group(function(){
+            Route::post('/pricing', 'store')->name('pricing.store');
+            Route::put('/update-pricing/{id}', 'update')->name('pricing.update');
+            Route::delete('/delete-pricing/{id}', 'destroy')->name('pricing.destroy');
+
+        });
         Route::controller(ProductController::class)->group(function () {
             Route::get('/{category}', 'index')->name('products');
             Route::get('/products/{category}/create', 'create')->name('products.create');
+            Route::post('/product/store', 'store')->name('product.store');
         });
 
 
