@@ -15,10 +15,14 @@
                                 <div class="card-body">
                                     <div class="grid grid-cols-1 gap-5 md:grid-cols-12">
                                         <div class="rounded-md md:col-span-12 md:row-span-2 bg-slate-100 dark:bg-zink-600">
-                                            <img src="{{ asset('uploads/kqhahtherapy.jpeg') }}" alt="">
+                                            <img src="{{ asset('storage/' . $product->image_path) }}" alt=""
+                                                width="100%" style="height: 250px">
                                         </div>
 
 
+                                    </div>
+                                    <div class="text-center">
+                                        <p>{{ $product->name }}</p>
                                     </div>
 
                                     <div class="flex gap-2 mt-4 shrink-0">
@@ -45,18 +49,41 @@
                                 <div class="mb-4">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <p class="mb-1 text-green-500">Price</p>
-                                    <h4>$487.32
-                                    </h4>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p class="mb-1 text-green-500">Alternative Price</p>
-                                            <input type="radio" name="price" id=""> 2oz-$35 &nbsp; &nbsp; &nbsp;
-                                            <input type="radio" name="price" id=""> 2oz-$35 &nbsp; &nbsp; &nbsp;
-                                            <input type="radio" name="price" id=""> 2oz-$35 &nbsp; &nbsp; &nbsp;
-                                            <input type="radio" name="price" id=""> 2oz-$35 &nbsp; &nbsp; &nbsp;
+                                            <p class="mb-1 ">Price</p>
+
+                                            @php
+                                                $prices = json_decode($product->price, true); //
+                                            @endphp
+
+                                            @if ($product->category == 'shirts')
+                                                @foreach ($prices as $price)
+                                                    <div>
+                                                        <h4>$ {{ $price }}</h4>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                @if (!empty($prices) && is_array($prices))
+                                                    @php
+                                                        $pricing = \App\Models\Pricing::findOrFail($prices[0]); // Fetch the first pricing record
+                                                    @endphp
+                                                    <h4>{{ $pricing->milliliters }} - ${{ $pricing->price }}</h4>
+                                                    <!-- Display the fetched price -->
+                                                @else
+                                                    <p>No price available</p>
+                                                @endif
+                                            @endif
 
                                         </div>
+
+                                        @if ($product->category != 'shirts')
+                                            <div class="col-md-6">
+                                                <p class="mb-1 ">Alternative Price</p>
+
+                                                
+
+
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
 
@@ -140,84 +167,70 @@
                                 @endif --}}
 
 
-                                <div class="grid grid-cols-1 gap-5 my-5 xl:grid-cols-3">
-                                    <div
-                                        class="flex items-center gap-5 p-4 border rounded-md border-slate-200 dark:border-zink-500">
-                                        <div class="flex items-center justify-center">
-                                            <i data-lucide="truck"
-                                                class="w-6 h-6 text-slate-500 fill-slate-200 dark:text-zink-200 dark:fill-zink-500"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-1">Estimated Delivery</h6>
-                                            <p class="text-slate-500 " id="event-date"></p>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="flex items-center gap-5 p-4 border rounded-md border-slate-200 dark:border-zink-500">
-                                        <div class="flex items-center justify-center">
-                                            <i data-lucide="container"
-                                                class="w-6 h-6 text-slate-500 fill-slate-200 dark:text-zink-200 dark:fill-zink-500"></i>
-                                        </div>
-                                        <div>
-                                            <h6 class="mb-1">Free Shipping & Returns</h6>
-                                            <p class="text-slate-500 dark:text-zink-200">On all orders over $200.00</p>
-                                        </div>
-                                    </div>
-                                </div>
+
 
                                 <div class="mt-5">
                                     <h6 class="mb-3 text-15">Product Description:</h6>
-                                    <p class="mb-2 text-slate-500 dark:text-zink-200">Latest <b>Trends</b> in Fashion
-                                        Clothing. Currently, the latest clothing trends for women on FabAlley include
-                                        playful check print, breezy floral motif, bold red hue, cool denim fabric, quirky
-                                        polka dot and romantic ruffles.</p>
-                                    <p class="text-slate-500 dark:text-zink-200"><b>Avoid shapeless and baggy clothing</b>.
-                                        Stay away from pieces with extra fabric at the hips or bust to keep your look
-                                        proportionate. Avoid wearing ruffles or pleats around your waist or hips. Be sure to
-                                        wear supportive undergarments that fit you well!</p>
+                                    <p class="mb-2 text-slate-500 dark:text-zink-200">{{ $product->description }}</p>
                                 </div>
 
-                                <div class="mt-5">
-                                    <h6 class="mb-3 text-15">Features:</h6>
-                                    <div class="overflow-x-auto">
-                                        <table class="w-full">
-                                            <tbody>
-                                                <tr>
-                                                    <th
-                                                        class="px-3.5 py-2.5 font-semibold border-b border-transparent w-64 ltr:text-left rtl:text-right text-slate-500 dark:text-zink-200">
-                                                        Type</th>
-                                                    <td class="px-3.5 py-2.5 border-b border-transparent">Round Neck</td>
-                                                </tr>
+                                @if ($product->category == 'shirts')
+                                    <div class="mt-5">
+                                        <h6 class="mb-3 text-15">Features:</h6>
+                                        <div class="overflow-x-auto">
+                                            <table class="w-full">
+                                                <tbody>
+                                                    <tr>
+                                                        <th
+                                                            class="px-3.5 py-2.5 font-semibold border-b border-transparent w-64 ltr:text-left rtl:text-right text-slate-500 dark:text-zink-200">
+                                                            Color:</th>
+                                                        <td class="px-3.5 py-2.5 border-b border-transparent">
+                                                            {{ $product->color }}</td>
+                                                    </tr>
 
-                                                <tr>
-                                                    <th
-                                                        class="px-3.5 py-2.5 font-semibold border-b border-transparent w-64 ltr:text-left rtl:text-right text-slate-500 dark:text-zink-200">
-                                                        Pack of</th>
-                                                    <td class="px-3.5 py-2.5 border-b border-transparent">1</td>
-                                                </tr>
-                                                <tr>
-                                                    <th
-                                                        class="px-3.5 py-2.5 font-semibold border-b border-transparent w-64 ltr:text-left rtl:text-right text-slate-500 dark:text-zink-200">
-                                                        Product Code</th>
-                                                    <td class="px-3.5 py-2.5 border-b border-transparent">TWT1542</td>
-                                                </tr>
+                                                    <tr>
+                                                        <th
+                                                            class="px-3.5 py-2.5 font-semibold border-b border-transparent w-64 ltr:text-left rtl:text-right text-slate-500 dark:text-zink-200">
+                                                            Size :</th>
+                                                        <td class="px-3.5 py-2.5 border-b border-transparent">
 
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                                                            @php
+                                                                // Decode sizes from the product or default to an empty array
+                                                                $sizes = isset($product)
+                                                                    ? json_decode($product->sizes, true)
+                                                                    : [];
+                                                            @endphp
+                                                            <div class="flex flex-wrap gap-2">
+                                                                <!-- Container with horizontal flex layout -->
+                                                                @foreach (['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'] as $size)
+                                                                    @if (in_array($size, $sizes))
+                                                                        <div class="flex items-center">
+                                                                            <!-- Each size item -->
 
+                                                                            <label for="selectSize{{ $size }}"
+                                                                                class="flex items-center justify-center text-xs border rounded-md cursor-pointer size-10 border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/15 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">
+                                                                                {{ $size }}
+                                                                            </label>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
 
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                @endif
                             </div>
-                        </div><!--end card-->
+                        </div>
+
+
                     </div>
-                </div><!--end grid-->
-
+                </div>
             </div>
-            <!-- container-fluid -->
         </div>
-        <!-- End Page-content -->
-
-
     </div>
+
 @endsection
+

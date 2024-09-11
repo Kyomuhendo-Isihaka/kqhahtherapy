@@ -78,6 +78,10 @@ Route::group( ['prefix' => 'admin', 'middleware'=>['auth']],function () {
             Route::get('/{category}', 'index')->name('products');
             Route::get('/products/{category}/create', 'create')->name('products.create');
             Route::post('/product/store', 'store')->name('product.store');
+            Route::get('/products/{category}/edit/{id}', 'edit')->name('products.edit');
+            Route::put('/products/{id}', 'update')->name('product.update');
+            Route::delete('/delete-product/{id}', 'destroy')->name('product.destroy');
+
         });
 
 

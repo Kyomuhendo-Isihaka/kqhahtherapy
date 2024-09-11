@@ -61,8 +61,8 @@
                                     <div class="col-md-9">
                                         <p>Available oils</p>
                                         @foreach ($oils as $ol)
-                                        <a href="{{ route('product.details', $ol->id) }}" class="text-dark"><small>{{ $ol->name }}</small></a>&nbsp;
-
+                                            <a href="{{ route('product.details', $ol->id) }}"
+                                                class="text-dark"><small>{{ $ol->name }}</small></a>&nbsp;
                                         @endforeach
 
 
@@ -92,8 +92,8 @@
                                     <div class="col-md-9">
                                         <p>Available Butters</p>
                                         @foreach ($butters as $bt)
-                                        <a href="{{ route('product.details', $bt->id) }}" class="text-dark"><small>{{ $bt->name }}</small></a>&nbsp;
-
+                                            <a href="{{ route('product.details', $bt->id) }}"
+                                                class="text-dark"><small>{{ $bt->name }}</small></a>&nbsp;
                                         @endforeach
                                     </div>
                                 </div>
@@ -104,8 +104,8 @@
 
                 <li class="dropdown nav-item">
 
-                    <a href="{{ route('products.category', 'shirts') }}" class="nav-link text-dark mx-2"
-                        role="button" aria-haspopup="true" aria-expanded="false">Shirts</a>
+                    <a href="{{ route('products.category', 'shirts') }}" class="nav-link text-dark mx-2" role="button"
+                        aria-haspopup="true" aria-expanded="false">Shirts</a>
                     {{-- <ul class="dropdown-menu mx-auto ml-auto" style="width: 60vw">
                         <div class="container p-1">
                             <h6 class="text-center">Shirts</h6>
@@ -144,13 +144,13 @@
         <a href="{{ route('products.category', 'shirts') }}" class="nav-link d-md-none text-dark"
             aria-controls="mobileMenu">Shirts</a>
 
-        <button type="button" aria-controls="mobileMenu" data-drawer-target="cartSidePenal"
-            class=" navbar-toggler d-md-none inline-flex relative justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-200 ease-linear bg-topbar rounded-md btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:text-topbar-item-dark">
+        <a href="{{ route('cart') }}"
+            class="d-md-none inline-flex relative justify-center items-center p-0 text-topbar-item transition-all w-[37.5px] h-[37.5px] duration-200 ease-linear bg-topbar rounded-md btn hover:bg-topbar-item-bg-hover hover:text-topbar-item-hover group-data-[topbar=dark]:bg-topbar-dark group-data-[topbar=dark]:hover:bg-topbar-item-bg-hover-dark group-data-[topbar=dark]:hover:text-topbar-item-hover-dark group-data-[topbar=brand]:bg-topbar-brand group-data-[topbar=brand]:hover:bg-topbar-item-bg-hover-brand group-data-[topbar=brand]:hover:text-topbar-item-hover-brand group-data-[topbar=dark]:dark:bg-zink-700 group-data-[topbar=dark]:dark:hover:bg-zink-600 group-data-[topbar=brand]:text-topbar-item-brand group-data-[topbar=dark]:dark:hover:text-zink-50 group-data-[topbar=dark]:dark:text-zink-200 group-data-[topbar=dark]:text-topbar-item-dark">
             <i data-lucide="shopping-cart"
                 class="inline-block w-5 h-5 stroke-1 fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand"></i>
             <span
                 class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-500 border-white rounded-full -top-1 -right-1">3</span>
-        </button>
+        </a>
 
 
         {{-- <button class="navbar-toggler d-md-none" type="button" data-toggle="collapse" data-target="#mobileMenu"

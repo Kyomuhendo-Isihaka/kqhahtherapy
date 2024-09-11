@@ -23,6 +23,7 @@ class HomeController extends Controller
     }
 
     public function productDetails($product){
+        $product = Product::findOrFail($product);
         return view('pages.product_details', compact('product'));
     }
 

@@ -23,17 +23,9 @@
 
                             @foreach ($products as $product)
                                 <div class="card md:group-[.gridView]:flex relative">
-                                                                      @if ($product->category == 'oils')
-                                        <img src="{{ asset('uploads/image11.jpeg') }}" alt="" style="height: 150px">
-                                    @else
-                                        @if ($product->category == 'butters')
-                                            <img src="{{ asset('uploads/image18.jpeg') }}" alt=""
-                                                style="height: 150px">
-                                        @else
-                                            <img src="{{ asset('uploads/22.jpg') }}" alt=""
-                                                style="height: 150px">
-                                        @endif
-                                    @endif
+
+                                    <img src="{{ asset('storage/'.$product->image_path) }}" alt="" style="height: 150px">
+
                                     <div
                                         class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-3 group-[.gridView]:gap-3 group-[.gridView]:grow">
                                         <div class="group-[.gridView]:grow text-center">
@@ -54,29 +46,19 @@
                                                     </div>
                                                 @endforeach
                                             @else
-                                            {{-- <div>
-                                                @if (!empty($prices) && is_array(json_decode($prices)))
-                                                    @php
-                                                        $price_ids = json_decode($prices); // Decode the JSON array of price IDs
-                                                        $pricing = \App\Models\Pricing::findOrFail($price_ids[0]); // Fetch the first pricing record
-                                                    @endphp
-                                                    <p>{{ $pricing->milliliters }}ml - ${{ $pricing->price }}</p> <!-- Display the fetched price -->
-                                                @else
-                                                    <p>No price available</p>
-                                                @endif
-                                            </div> --}}
+                                              
 
-                                            <div>
-                                                @if (!empty($prices) && is_array($prices))
-                                                    @php
-                                                        $pricing = \App\Models\Pricing::findOrFail($prices[0]); // Fetch the first pricing record
-                                                    @endphp
-                                                    <p>{{ $pricing->milliliters }} - ${{ $pricing->price }}</p> <!-- Display the fetched price -->
-                                                @else
-                                                    <p>No price available</p>
-                                                @endif
-                                            </div>
-
+                                                <div>
+                                                    @if (!empty($prices) && is_array($prices))
+                                                        @php
+                                                            $pricing = \App\Models\Pricing::findOrFail($prices[0]); // Fetch the first pricing record
+                                                        @endphp
+                                                        <p>{{ $pricing->milliliters }} - ${{ $pricing->price }}</p>
+                                                        <!-- Display the fetched price -->
+                                                    @else
+                                                        <p>No price available</p>
+                                                    @endif
+                                                </div>
                                             @endif
 
                                         </div>

@@ -43,18 +43,10 @@
 
                                         @foreach ($products as $product)
                                             <div class="card md:group-[.gridView]:flex relative">
-                                                @if ($product->category == 'oils')
-                                                    <img src="{{ asset('uploads/image11.jpeg') }}" alt=""
+
+                                                    <img src="{{ asset('storage/'. $product->image_path) }}" alt=""
                                                         style="height: 150px">
-                                                @else
-                                                    @if ($product->category == 'butters')
-                                                        <img src="{{ asset('uploads/image18.jpeg') }}" alt=""
-                                                            style="height: 150px">
-                                                    @else
-                                                        <img src="{{ asset('uploads/image17.jpeg') }}" alt=""
-                                                            style="height: 150px">
-                                                    @endif
-                                                @endif
+
                                                 <div
                                                     class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-3 group-[.gridView]:gap-3 group-[.gridView]:grow">
                                                     <div class="group-[.gridView]:grow text-center">
@@ -112,15 +104,9 @@
 
                     @foreach ($products as $product)
                         <div class="card md:group-[.gridView]:flex relative">
-                            @if ($product->category == 'oils')
-                                <img src="{{ asset('uploads/image11.jpeg') }}" alt="" style="height: 150px">
-                            @else
-                                @if ($product->category == 'butters')
-                                    <img src="{{ asset('uploads/image18.jpeg') }}" alt="" style="height: 150px">
-                                @else
-                                    <img src="{{ asset('uploads/22.jpg') }}" alt="" style="height: 150px">
-                                @endif
-                            @endif
+
+                                <img src="{{ asset('storage/'. $product->image_path) }}" alt="" style="height: 150px">
+                            
                             <div
                                 class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-3 group-[.gridView]:gap-3 group-[.gridView]:grow">
                                 <div class="group-[.gridView]:grow text-center">
