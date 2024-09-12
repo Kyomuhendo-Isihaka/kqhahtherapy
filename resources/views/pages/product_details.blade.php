@@ -21,18 +21,6 @@
 
 
                                     </div>
-                                    <div class="text-center">
-                                        <p>{{ $product->name }}</p>
-                                    </div>
-
-                                    <div class="flex gap-2 mt-4 shrink-0">
-                                        <a href="" type="button"
-                                            class="w-full bg-dark border-dashed text-white btn border-custom-500 hover:text-custom-500 hover:bg-custom-50 hover:border-custom-600 focus:text-custom-600 focus:bg-custom-50 focus:border-custom-600 active:text-custom-600 active:bg-custom-50 active:border-custom-600 dark:bg-zink-700 dark:ring-custom-400/20 dark:hover:bg-custom-800/20 dark:focus:bg-custom-800/20 dark:active:bg-custom-800/20"><i
-                                                data-lucide="shopping-cart"
-                                                class="inline-block align-middle size-3 ltr:mr-1 rtl:ml-1"></i> <span
-                                                class="align-middle">Add to Cart</span></a>
-                                    </div>
-
 
                                 </div>
                             </div><!--end card-->
@@ -44,131 +32,8 @@
                         <div class="card">
                             <div class="card-body">
 
-
-
-                                <div class="mb-4">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <p class="mb-1 ">Price</p>
-
-                                            @php
-                                                $prices = json_decode($product->price, true); //
-                                            @endphp
-
-                                            @if ($product->category == 'shirts')
-                                                @foreach ($prices as $price)
-                                                    <div>
-                                                        <h4>$ {{ $price }}</h4>
-                                                    </div>
-                                                @endforeach
-                                            @else
-                                                @if (!empty($prices) && is_array($prices))
-                                                    @php
-                                                        $pricing = \App\Models\Pricing::findOrFail($prices[0]); // Fetch the first pricing record
-                                                    @endphp
-                                                    <h4>{{ $pricing->milliliters }} - ${{ $pricing->price }}</h4>
-                                                    <!-- Display the fetched price -->
-                                                @else
-                                                    <p>No price available</p>
-                                                @endif
-                                            @endif
-
-                                        </div>
-
-                                        @if ($product->category != 'shirts')
-                                            <div class="col-md-6">
-                                                <p class="mb-1 ">Alternative Price</p>
-
-                                                
-
-
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                {{-- @if ($category == 'shirts')
-                                    <h6 class="mb-3 text-15">Available Color</h6>
-                                    <div class="flex flex-wrap items-center gap-2">
-                                        <input id="color1"
-                                            class="border rounded-sm appearance-none cursor-pointer size-5 border-custom-500 bg-custom-500 checked:bg-custom-500 checked:border-custom-500 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="" disabled="">
-                                        <input id="color2"
-                                            class="bg-red-300 border border-red-300 rounded-sm appearance-none cursor-pointer size-5 checked:bg-red-300 checked:border-red-300 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                        <input id="color3"
-                                            class="bg-green-300 border border-green-300 rounded-sm appearance-none cursor-pointer size-5 checked:bg-green-300 checked:border-green-300 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                        <input id="color4"
-                                            class="border rounded-sm appearance-none cursor-pointer size-5 border-slate-500 bg-slate-500 checked:bg-slate-500 checked:border-slate-500 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                        <input id="color5"
-                                            class="bg-purple-500 border border-purple-500 rounded-sm appearance-none cursor-pointer size-5 checked:bg-purple-500 checked:border-purple-500 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                        <input id="color6"
-                                            class="border rounded-sm appearance-none cursor-pointer size-5 bg-sky-500 border-sky-500 checked:bg-sky-500 checked:border-sky-500 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                        <input id="color7"
-                                            class="bg-yellow-500 border border-yellow-500 rounded-sm appearance-none cursor-pointer size-5 checked:bg-yellow-500 checked:border-yellow-500 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                        <input id="color7"
-                                            class="bg-green-500 border border-green-500 rounded-sm appearance-none cursor-pointer size-5 checked:bg-green-500 checked:border-green-500 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                        <input id="color8"
-                                            class="border rounded-sm appearance-none cursor-pointer size-5 bg-slate-800 border-slate-800 checked:bg-slate-800 checked:border-slate-800 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                        <input id="color9"
-                                            class="border rounded-sm appearance-none cursor-pointer size-5 bg-slate-200 border-slate-200 checked:bg-slate-200 checked:border-slate-200 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                        <input id="color10"
-                                            class="border rounded-sm appearance-none cursor-pointer size-5 bg-emerald-300 border-embg-emerald-300 checked:bg-emerald-300 checked:border-embg-emerald-300 disabled:opacity-75 disabled:cursor-default"
-                                            type="radio" name="SelectColor" value="">
-                                    </div>
-
-                                    <h6 class="mt-5 mb-3 text-15">Available Size</h6>
-                                    <div class="flex flex-wrap items-center gap-2">
-                                        <div>
-                                            <input id="selectSizeXS" class="hidden peer" type="radio" value="XS"
-                                                name="selectSize">
-                                            <label for="selectSizeXS"
-                                                class="flex items-center justify-center w-8 h-8 text-xs border rounded-md cursor-pointer border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/20 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">XS</label>
-                                        </div>
-                                        <div>
-                                            <input id="selectSizeS" class="hidden peer" type="radio" value="S"
-                                                name="selectSize" checked="">
-                                            <label for="selectSizeS"
-                                                class="flex items-center justify-center w-8 h-8 text-xs border rounded-md cursor-pointer border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/20 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">S</label>
-                                        </div>
-                                        <div>
-                                            <input id="selectSizeM" class="hidden peer" type="radio" value="M"
-                                                name="selectSize" disabled="">
-                                            <label for="selectSizeM"
-                                                class="flex items-center justify-center w-8 h-8 text-xs border rounded-md cursor-pointer border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/20 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">M</label>
-                                        </div>
-                                        <div>
-                                            <input id="selectSizeL" class="hidden peer" type="radio" value="L"
-                                                name="selectSize">
-                                            <label for="selectSizeL"
-                                                class="flex items-center justify-center w-8 h-8 text-xs border rounded-md cursor-pointer border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/20 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">L</label>
-                                        </div>
-                                        <div>
-                                            <input id="selectSizeXL" class="hidden peer" type="radio" value="XL"
-                                                name="selectSize">
-                                            <label for="selectSizeXL"
-                                                class="flex items-center justify-center w-8 h-8 text-xs border rounded-md cursor-pointer border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/20 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">XL</label>
-                                        </div>
-                                        <div>
-                                            <input id="selectSize2XL" class="hidden peer" type="radio" value="2XL"
-                                                name="selectSize">
-                                            <label for="selectSize2XL"
-                                                class="flex items-center justify-center w-8 h-8 text-xs border rounded-md cursor-pointer border-slate-200 dark:border-zink-500 peer-checked:bg-custom-50 dark:peer-checked:bg-custom-500/20 peer-checked:border-custom-300 dark:peer-checked:border-custom-700 peer-disabled:bg-slate-50 dark:peer-disabled:bg-slate-500/20 peer-disabled:border-slate-100 dark:peer-disabled:border-slate-800 peer-disabled:cursor-default peer-disabled:text-slate-500 dark:peer-disabled:text-zink-200">2XL</label>
-                                        </div>
-                                    </div>
-                                @endif --}}
-
-
-
-
+                                <h4><b>{{ $product->name }}</b></h4>
+                                <hr>
                                 <div class="mt-5">
                                     <h6 class="mb-3 text-15">Product Description:</h6>
                                     <p class="mb-2 text-slate-500 dark:text-zink-200">{{ $product->description }}</p>
@@ -222,6 +87,78 @@
                                             </table>
                                         </div>
                                 @endif
+
+                                <div class="mb-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p class="mb-1 ">Price</p>
+
+                                            @php
+                                                $prices = json_decode($product->price, true); //
+                                            @endphp
+
+                                            @if ($product->category == 'shirts')
+                                                @foreach ($prices as $price)
+                                                    <div>
+                                                        <h4>$ {{ $price }}</h4>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                @if (!empty($prices) && is_array($prices))
+                                                    <table class="table table-bordered">
+                                                        <thead>
+
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($prices as $priceId)
+                                                                @php
+                                                                    $pricing = \App\Models\Pricing::findOrFail(
+                                                                        $priceId,
+                                                                    ); // Fetch each pricing record
+                                                                @endphp
+                                                                <tr>
+                                                                    <td>
+                                                                        <input type="radio" name="selected_price"
+                                                                            value="{{ $pricing->id }}" />
+                                                                    </td>
+                                                                    <td>{{ $pricing->milliliters }}</td>
+                                                                    <td>${{ $pricing->price }}</td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                @else
+                                                    <p>No price available</p>
+                                                @endif
+
+                                            @endif
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-md-4">
+                                        <div class="flex items-center gap-2 mt-auto">
+                                            <div class="inline-flex p-2 text-center border rounded input-step border-slate-200 dark:border-zink-500">
+                                                <button type="button" class="border w-7 leading-[15px] minus-value bg-slate-200 dark:bg-zink-600 dark:border-zink-600 rounded transition-all duration-200 ease-linear border-slate-200 text-slate-500 dark:text-zink-200 hover:bg-custom-500 dark:hover:bg-custom-500 hover:text-custom-50 dark:hover:text-custom-50 hover:border-custom-500 dark:hover:border-custom-500 focus:bg-custom-500 dark:focus:bg-custom-500 focus:border-custom-500 dark:focus:border-custom-500 focus:text-custom-50 dark:focus:text-custom-50"><i data-lucide="minus" class="inline-block w-4 h-4"></i></button>
+                                                <input type="number" class="text-center ltr:pl-2 rtl:pr-2 w-15 h-7 products-quantity dark:bg-zink-700 focus:shadow-none" value="1" min="0" max="100" readonly="">
+                                                <button type="button" class="transition-all duration-200 ease-linear border rounded border-slate-200 bg-slate-200 dark:bg-zink-600 dark:border-zink-600 w-7 plus-value text-slate-500 dark:text-zink-200 hover:bg-custom-500 dark:hover:bg-custom-500 hover:text-custom-50 dark:hover:text-custom-50 hover:border-custom-500 dark:hover:border-custom-500 focus:bg-custom-500 dark:focus:bg-custom-500 focus:border-custom-500 dark:focus:border-custom-500 focus:text-custom-50 dark:focus:text-custom-50"><i data-lucide="plus" class="inline-block w-4 h-4"></i></button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="flex shrink-0">
+                                            <a href="" type="button"
+                                                class="w-full bg-dark border-dashed text-white btn border-custom-500 hover:text-custom-500 hover:bg-custom-50 hover:border-custom-600 focus:text-custom-600 focus:bg-custom-50 focus:border-custom-600 active:text-custom-600 active:bg-custom-50 active:border-custom-600 dark:bg-zink-700 dark:ring-custom-400/20 dark:hover:bg-custom-800/20 dark:focus:bg-custom-800/20 dark:active:bg-custom-800/20"><i
+                                                    data-lucide="shopping-cart"
+                                                    class="inline-block align-middle size-3 ltr:mr-1 rtl:ml-1"></i> <span
+                                                    class="align-middle">Add to Cart</span></a>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -233,4 +170,3 @@
     </div>
 
 @endsection
-

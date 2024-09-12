@@ -23,13 +23,14 @@
                         @if ($category == 'oils' || $category == 'butters')
                             <div class="row">
                                 <div class="col-md-2 bg-light p-2 bg-white fixed-left">
-                                    <h6 class="text-center">Filter Oils</h6>
+                                    <h6 class="text-center">Price Filter </h6>
                                     <hr>
                                     <form action="" class="text-center">
                                         @foreach ($pricings as $p)
-                                        <div class="form-group py-1">
-                                            <input type="checkbox" name="" id=""> {{ $p->milliliters }}- ${{ $p->price }}
-                                        </div>
+                                            <div class="form-group py-1">
+                                                <input type="checkbox" name="" id=""> {{ $p->milliliters }}-
+                                                ${{ $p->price }}
+                                            </div>
                                         @endforeach
 
 
@@ -44,8 +45,8 @@
                                         @foreach ($products as $product)
                                             <div class="card md:group-[.gridView]:flex relative">
 
-                                                    <img src="{{ asset('storage/'. $product->image_path) }}" alt=""
-                                                        style="height: 150px">
+                                                <img src="{{ asset('storage/' . $product->image_path) }}" alt=""
+                                                    style="height: 150px">
 
                                                 <div
                                                     class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-3 group-[.gridView]:gap-3 group-[.gridView]:grow">
@@ -74,15 +75,15 @@
                                                         </div>
                                                     </div>
 
-                                                    <div
-                                                    class="flex items-center gap-2 mt-3 group-[.gridView]:mt-0 group-[.gridView]:self-end">
-                                                    <button type="button"
-                                                        class="w-full bg-dark border-dashed text-white btn border-slate-500 hover:text-slate-500 hover:bg-slate-50 hover:border-slate-600 focus:text-slate-600 focus:bg-slate-50 focus:border-slate-600 active:text-slate-600 active:bg-slate-50 active:border-slate-600 dark:bg-zink-700 dark:text-zink-200 dark:border-zink-400 dark:ring-zink-400/20 dark:hover:bg-zink-600 dark:hover:text-zink-100 dark:focus:bg-zink-600 dark:focus:text-zink-100 dark:active:bg-zink-600 dark:active:text-zink-100"><i
-                                                            data-lucide="shopping-cart"
-                                                            class="inline-block w-3 h-3 leading-none"></i>
-                                                        <span class="align-middle">Add to Cart</span></button>
+                                                    {{-- <div
+                                                        class="flex items-center gap-2 mt-3 group-[.gridView]:mt-0 group-[.gridView]:self-end">
+                                                        <button type="button"
+                                                            class="w-full bg-dark border-dashed text-white btn border-slate-500 hover:text-slate-500 hover:bg-slate-50 hover:border-slate-600 focus:text-slate-600 focus:bg-slate-50 focus:border-slate-600 active:text-slate-600 active:bg-slate-50 active:border-slate-600 dark:bg-zink-700 dark:text-zink-200 dark:border-zink-400 dark:ring-zink-400/20 dark:hover:bg-zink-600 dark:hover:text-zink-100 dark:focus:bg-zink-600 dark:focus:text-zink-100 dark:active:bg-zink-600 dark:active:text-zink-100"><i
+                                                                data-lucide="shopping-cart"
+                                                                class="inline-block w-3 h-3 leading-none"></i>
+                                                            <span class="align-middle">Add to Cart</span></button>
 
-                                                </div>
+                                                    </div> --}}
                                                 </div>
 
 
@@ -105,8 +106,8 @@
                     @foreach ($products as $product)
                         <div class="card md:group-[.gridView]:flex relative">
 
-                                <img src="{{ asset('storage/'. $product->image_path) }}" alt="" style="height: 150px">
-                            
+                            <img src="{{ asset('storage/' . $product->image_path) }}" alt="" style="height: 150px">
+
                             <div
                                 class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-3 group-[.gridView]:gap-3 group-[.gridView]:grow">
                                 <div class="group-[.gridView]:grow text-center">
@@ -131,13 +132,13 @@
 
                                 </div>
 
-                                <div class="flex items-center gap-2 mt-3 group-[.gridView]:mt-0 group-[.gridView]:self-end">
+                                {{-- <div class="flex items-center gap-2 mt-3 group-[.gridView]:mt-0 group-[.gridView]:self-end">
                                     <button type="button"
                                         class="w-full bg-dark border-dashed text-white btn border-slate-500 hover:text-slate-500 hover:bg-slate-50 hover:border-slate-600 focus:text-slate-600 focus:bg-slate-50 focus:border-slate-600 active:text-slate-600 active:bg-slate-50 active:border-slate-600 dark:bg-zink-700 dark:text-zink-200 dark:border-zink-400 dark:ring-zink-400/20 dark:hover:bg-zink-600 dark:hover:text-zink-100 dark:focus:bg-zink-600 dark:focus:text-zink-100 dark:active:bg-zink-600 dark:active:text-zink-100"><i
                                             data-lucide="shopping-cart" class="inline-block w-3 h-3 leading-none"></i>
                                         <span class="align-middle">Add to Cart</span></button>
 
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     @endforeach
