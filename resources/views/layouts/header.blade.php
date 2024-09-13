@@ -19,7 +19,12 @@
         $pricings = \App\Models\Pricing::all();
         $oils = \App\Models\Product::where('category', 'oils')->get();
         $butters = \App\Models\Product::where('category', 'butters')->get();
+
+        $cartCount = \App\Models\Cart::where('user_id', 1)
+    ->where('cart_status', 'ordered')
+    ->count();
     @endphp
+
     <div class="container d-flex justify-content-between align-items-center py-3">
         <a href="{{ route('home') }}" class="d-flex align-items-center text-decoration-none">
             <img src="{{ asset('uploads/kqhahtherapy.jpeg') }}" width="40" class="mr-2" alt="hakateq Logo">
@@ -106,11 +111,7 @@
 
                     <a href="{{ route('products.category', 'shirts') }}" class="nav-link text-dark mx-2" role="button"
                         aria-haspopup="true" aria-expanded="false">Shirts</a>
-                    {{-- <ul class="dropdown-menu mx-auto ml-auto" style="width: 60vw">
-                        <div class="container p-1">
-                            <h6 class="text-center">Shirts</h6>
-                        </div>
-                    </ul> --}}
+
                 </li>
 
                 <li>
@@ -120,7 +121,7 @@
                         <i data-lucide="shopping-cart"
                             class="inline-block w-5 h-5 stroke-1 fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand"></i>
                         <span
-                            class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-500 border-white rounded-full -top-1 -right-1">3</span>
+                            class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-500 border-white rounded-full -top-1 -right-1">{{ $cartCount }}</span>
                     </a>
 
                 </li>
@@ -149,7 +150,7 @@
             <i data-lucide="shopping-cart"
                 class="inline-block w-5 h-5 stroke-1 fill-slate-100 group-data-[topbar=dark]:fill-topbar-item-bg-hover-dark group-data-[topbar=brand]:fill-topbar-item-bg-hover-brand"></i>
             <span
-                class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-500 border-white rounded-full -top-1 -right-1">3</span>
+                class="absolute flex items-center justify-center w-[16px] h-[16px] text-xs text-white bg-red-500 border-white rounded-full -top-1 -right-1">{{ $cartCount }}</span>
         </a>
 
 

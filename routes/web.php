@@ -47,10 +47,15 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/{category}/products', 'products')->name('products.category');
     Route::get('/products/{product}', 'productDetails')->name('product.details');
     Route::get('/checkout', 'checkout')->name('checkout');
+
+
 });
 
 Route::controller(CartController::class)->group(function () {
     Route::get('/cart', 'index')->name('cart');
+    Route::post('/add-to-cart', 'store')->name('cart.store');
+    Route::post('/reduce-cart','reduceFromCart')->name('cart.reduce');
+    Route::get('/cart/delete/{product_id}{user_id}','deleteFromCart')->name('cart.delete');
 });
 
 
