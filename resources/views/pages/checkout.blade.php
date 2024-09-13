@@ -14,7 +14,7 @@
 
             </div>
             <div class="grid grid-cols-1 xl:grid-cols-12 gap-x-5">
-                
+
                 <div class="xl:col-span-8">
 
                     <h6 class="mb-4 text-15">Shipping Information</h6>
@@ -30,7 +30,7 @@
                                 </div><!--end col-->
 
 
-                                <div class="xl:col-span-12">
+                                <div class="xl:col-span-4">
                                     <label for="townCityInput"
                                         class="inline-block mb-2 text-base font-medium">Town/City</label>
                                     <input type="text" id="townCityInput"
