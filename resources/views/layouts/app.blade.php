@@ -27,12 +27,22 @@
 
     <div class="group-data-[sidebar-size=sm]:min-h-sm group-data-[sidebar-size=sm]:relative">
 
-        <div class="container-fluid" style="margin-top: 50px">
+        <div class="bg-white" style="margin-top: 50px">
+
             @yield('content')
         </div>
 
 
     </div>
+    <div class="floating-icons">
+        <a href="https://wa.me/+96596750535" target="_blank" class="whatsapp-icon">
+            <img src="{{ asset('uploads/whatsapp.png') }}" alt="WhatsApp Icon">
+        </a>
+        <a href="mailto:kqhatherapy9@gmail.com" class="email-icon">
+            <img src="{{ asset('uploads/email.png') }}" alt="Email Icon">
+        </a>
+    </div>
+
 
     @include('layouts.footer')
 
@@ -125,33 +135,98 @@
     <script src="{{ asset('assets/js/starcode.bundle.js') }}"></script>
     <!--product Grid init js-->
     <script src="{{ asset('assets/js/pages/apps-ecommerce-product-grid.init.js') }}"></script>
-    <script src="{{ asset('assets/js/pages/apps-ecommerce-cart.init.js')}}"></script>
+    <script src="{{ asset('assets/js/pages/apps-ecommerce-cart.init.js') }}"></script>
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
 
 
 
-<script>
-    // Function to format date as 'DD - DD MMM, YYYY'
-    function formatDateRange(startDate, endDate) {
-        const options = { day: '2-digit', month: 'short', year: 'numeric' };
-        const startDay = startDate.toLocaleDateString('en-US', { day: '2-digit' });
-        const endDay = endDate.toLocaleDateString('en-US', { day: '2-digit' });
-        const monthYear = startDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-        return `${startDay} - ${endDay} ${monthYear}`;
-    }
+    <script>
+        // Function to format date as 'DD - DD MMM, YYYY'
+        function formatDateRange(startDate, endDate) {
+            const options = {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            };
+            const startDay = startDate.toLocaleDateString('en-US', {
+                day: '2-digit'
+            });
+            const endDay = endDate.toLocaleDateString('en-US', {
+                day: '2-digit'
+            });
+            const monthYear = startDate.toLocaleDateString('en-US', {
+                month: 'short',
+                year: 'numeric'
+            });
+            return `${startDay} - ${endDay} ${monthYear}`;
+        }
 
-    // Get today's date and calculate start and end dates
-    const today = new Date();
-    const startDate = new Date(today);
-    startDate.setDate(today.getDate() + 3); // Start date 3 days from today
-    const endDate = new Date(startDate);
-    endDate.setDate(startDate.getDate() + 6); // 7-day range
+        // Get today's date and calculate start and end dates
+        const today = new Date();
+        const startDate = new Date(today);
+        startDate.setDate(today.getDate() + 3); // Start date 3 days from today
+        const endDate = new Date(startDate);
+        endDate.setDate(startDate.getDate() + 6); // 7-day range
 
-    // Display the formatted date range
-    document.getElementById('event-date').textContent = formatDateRange(startDate, endDate);
-</script>
+        // Display the formatted date range
+        document.getElementById('event-date').textContent = formatDateRange(startDate, endDate);
+    </script>
+
+    <script>
+        // Function to generate a unique integer user ID
+        function generateUserId() {
+            return Math.floor(Math.random() * 900000) + 100000; // Random 6-digit integer
+        }
+
+        // Set cookie
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                const date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+
+        // Get cookie
+        function getCookie(name) {
+            const nameEQ = name + "=";
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Check if `user_id` exists in the cookie; if not, create a new one
+        function setupUserId() {
+            let userId = getCookie('user_id');
+
+            if (!userId) {
+                userId = generateUserId();
+                setCookie('user_id', userId, 365); // Store for 1 year
+            }
+
+            console.log('User ID:', userId);
+
+            // Add the userId to form inputs (if any forms exist)
+            let userInput = document.querySelector('input[name="user_id"]');
+            if (userInput) {
+                userInput.value = userId;
+            }
+        }
+
+        // Run this function when the page loads
+        window.onload = setupUserId;
+    </script>
+
+
+
 
 </body>
 

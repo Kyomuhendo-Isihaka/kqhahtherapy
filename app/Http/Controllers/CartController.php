@@ -10,7 +10,7 @@ class CartController extends Controller
 {
     //
     public function index(){
-        $user_id = 1; // Get the currently authenticated user's ID
+        $user_id = request('user_id'); // Get the currently authenticated user's ID
         $cartUser = Cart::where('user_id', $user_id)->where('cart_status','ordered')->orderBy('id', 'desc')->get();
 
         $cartCount = $cartUser->count();

@@ -2,18 +2,24 @@
 
 
 @section('content')
-    <div class="relative min-h-screen group-data-[sidebar-size=sm]:min-h-sm">
 
+    <div class="relative min-h-screen group-data-[sidebar-size=sm]:min-h-sm">
+        <img src="{{ asset('uploads/kqha_baner.jpg') }}" alt=""
+        style=" width: 100%;
+    background-size: cover;
+    background-position: center; margin-top:100px;">
         <div
             class="group-data-[sidebar-size=lg]:ltr:md:ml-vertical-menu group-data-[sidebar-size=lg]:rtl:md:mr-vertical-menu group-data-[sidebar-size=md]:ltr:ml-vertical-menu-md group-data-[sidebar-size=md]:rtl:mr-vertical-menu-md group-data-[sidebar-size=sm]:ltr:ml-vertical-menu-sm group-data-[sidebar-size=sm]:rtl:mr-vertical-menu-sm pt-[calc(theme('spacing.header')_*_1)] pb-[calc(theme('spacing.header')_*_0.8)] px-4 group-data-[navbar=bordered]:pt-[calc(theme('spacing.header')_*_1.3)] group-data-[navbar=hidden]:pt-0 group-data-[layout=horizontal]:mx-auto group-data-[layout=horizontal]:max-w-screen-2xl group-data-[layout=horizontal]:px-0 group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:ltr:md:ml-auto group-data-[layout=horizontal]:group-data-[sidebar-size=lg]:rtl:md:mr-auto group-data-[layout=horizontal]:md:pt-[calc(theme('spacing.header')_*_1.6)] group-data-[layout=horizontal]:px-3 group-data-[layout=horizontal]:group-data-[navbar=hidden]:pt-[calc(theme('spacing.header')_*_0.9)]">
+
             <div class="container-fluid group-data-[content=boxed]:max-w-boxed mx-auto">
 
 
                 <div class="grid grid-cols-1 2xl:grid-cols-12 gap-x-5 ">
 
+
                     <div class="2xl:col-span-9">
                         <div class="flex flex-wrap items-center gap-2">
-                            <p class="grow">Products</p>
+                            <h4 class="grow text-center">Explore Our Products</h4>
 
                         </div>
 
@@ -24,7 +30,8 @@
                             @foreach ($products as $product)
                                 <div class="card md:group-[.gridView]:flex relative">
 
-                                    <img src="{{ asset('storage/'.$product->image_path) }}" alt="" style="height: 150px">
+                                    <img src="{{ asset('storage/' . $product->image_path) }}" alt=""
+                                        style="height: 200px">
 
                                     <div
                                         class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-3 group-[.gridView]:gap-3 group-[.gridView]:grow">
@@ -46,8 +53,6 @@
                                                     </div>
                                                 @endforeach
                                             @else
-
-
                                                 <div>
                                                     @if (!empty($prices) && is_array($prices))
                                                         @php
@@ -63,15 +68,7 @@
 
                                         </div>
 
-                                        {{-- <div
-                                            class="flex items-center gap-2 mt-3 group-[.gridView]:mt-0 group-[.gridView]:self-end">
-                                            <button type="button"
-                                                class="w-full bg-dark border-dashed text-white btn border-slate-500 hover:text-slate-500 hover:bg-slate-50 hover:border-slate-600 focus:text-slate-600 focus:bg-slate-50 focus:border-slate-600 active:text-slate-600 active:bg-slate-50 active:border-slate-600 dark:bg-zink-700 dark:text-zink-200 dark:border-zink-400 dark:ring-zink-400/20 dark:hover:bg-zink-600 dark:hover:text-zink-100 dark:focus:bg-zink-600 dark:focus:text-zink-100 dark:active:bg-zink-600 dark:active:text-zink-100"><i
-                                                    data-lucide="shopping-cart"
-                                                    class="inline-block w-3 h-3 leading-none"></i>
-                                                <span class="align-middle">View Product</span></button>
 
-                                        </div> --}}
                                     </div>
                                 </div>
                             @endforeach

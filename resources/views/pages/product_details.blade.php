@@ -42,7 +42,7 @@
                                 <form action="{{ route('cart.store') }}" method="POST">
                                     @csrf
                                     <input hidden type="number" name="product_id" value="{{ $product->id }}">
-                                    <input hidden type="number" name="user_id" value="1">
+                                    <input  hidden type="number" name="user_id" value="{{  request('user_id') }}">
 
 
                                     @if ($product->category == 'shirts')
@@ -188,5 +188,6 @@
             </div>
         </div>
     </div>
+
 
 @endsection

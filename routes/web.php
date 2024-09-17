@@ -47,15 +47,17 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/{category}/products', 'products')->name('products.category');
     Route::get('/products/{product}', 'productDetails')->name('product.details');
     Route::get('/checkout', 'checkout')->name('checkout');
-
+    Route::get('/thankyou', 'thankyou')->name('thankyou');
 
 });
+
+Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
 
 Route::controller(CartController::class)->group(function () {
     Route::get('/cart', 'index')->name('cart');
     Route::post('/add-to-cart', 'store')->name('cart.store');
     Route::post('/reduce-cart','reduceFromCart')->name('cart.reduce');
-    Route::get('/cart/delete/{product_id}{user_id}','deleteFromCart')->name('cart.delete');
+    Route::get('/cart/delete/{product_id}/{user_id}','deleteFromCart')->name('cart.delete');
 });
 
 
@@ -69,9 +71,11 @@ Route::group( ['prefix' => 'admin', 'middleware'=>['auth']],function () {
         });
 
 
-        Route::controller(OrderController::class)->group(function () {
-            Route::get('/orders', 'orders')->name('orders');
-        });
+        Route::get('/orders',[OrderController::class, 'orders'])->name('orders');
+        Route::get('/orders/{id}',[OrderController::class, 'orderDetails'])->name('orders.details');
+        Route::patch('/orders/update/{order}', [OrderController::class, 'update'])->name('orders.update');
+
+
 
         Route::controller(PricingController::class)->group(function(){
             Route::post('/pricing', 'store')->name('pricing.store');

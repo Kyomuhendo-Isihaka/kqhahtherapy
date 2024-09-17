@@ -564,7 +564,7 @@
                     </div>
                 @endforeach
 
-
+                {{ $products->links('components.pagination') }}
         </div>
     </div>
 @endsection

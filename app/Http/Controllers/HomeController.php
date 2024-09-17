@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Pricing;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -29,6 +30,31 @@ class HomeController extends Controller
 
 
     public function checkout(){
-        return view('pages.checkout');
+        $user_id = request('user_id'); // Get the currently authenticated user's ID
+        $cartUser = Cart::where('user_id', $user_id)->where('cart_status','ordered')->orderBy('id', 'desc')->get();
+
+        $cartCount = $cartUser->count();
+        $cart = [];
+        $total = [];
+
+        foreach ($cartUser as $user) {
+            $pdt = Product::find($user->products);
+
+            if ($pdt) {
+                $pdt["no_of_items"] = $user->no_of_items;
+                $pdt["pdt_cost"] = $pdt["no_of_items"]*$user->unit_price;
+                $actualprice = $user->total_cost;
+                $cart[] = $pdt;
+                $total[] = $actualprice;
+            }
+        }
+
+        $total = array_sum($total);
+
+        return view('pages.checkout', compact('cart', 'total'));
+    }
+
+    public function thankyou(){
+        return view('pages.thankyou');
     }
 }

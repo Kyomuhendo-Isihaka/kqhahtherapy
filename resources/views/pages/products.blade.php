@@ -46,7 +46,7 @@
                                             <div class="card md:group-[.gridView]:flex relative">
 
                                                 <img src="{{ asset('storage/' . $product->image_path) }}" alt=""
-                                                    style="height: 150px">
+                                                    style="height: 200px">
 
                                                 <div
                                                     class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-3 group-[.gridView]:gap-3 group-[.gridView]:grow">
@@ -106,7 +106,7 @@
                     @foreach ($products as $product)
                         <div class="card md:group-[.gridView]:flex relative">
 
-                            <img src="{{ asset('storage/' . $product->image_path) }}" alt="" style="height: 150px">
+                            <img src="{{ asset('storage/' . $product->image_path) }}" alt="" style="height: 200px">
 
                             <div
                                 class="card-body !pt-0 md:group-[.gridView]:flex group-[.gridView]:!p-3 group-[.gridView]:gap-3 group-[.gridView]:grow">
