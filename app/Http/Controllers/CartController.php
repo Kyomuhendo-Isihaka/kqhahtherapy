@@ -10,7 +10,7 @@ class CartController extends Controller
 {
     //
     public function index(){
-        $user_id = request('user_id'); // Get the currently authenticated user's ID
+        $user_id = request()->cookie('user_id'); // Get the currently authenticated user's ID
         $cartUser = Cart::where('user_id', $user_id)->where('cart_status','ordered')->orderBy('id', 'desc')->get();
 
         $cartCount = $cartUser->count();
@@ -37,7 +37,7 @@ class CartController extends Controller
     {
         $qty = $request->input("qtybutton");
         $pdt_id = $request->input("product_id");
-        $user_id = $request->input("user_id");
+        $user_id = request()->cookie('user_id');
         $price = $request->input('price');
 
 

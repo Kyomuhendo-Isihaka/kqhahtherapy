@@ -174,7 +174,7 @@
         document.getElementById('event-date').textContent = formatDateRange(startDate, endDate);
     </script>
 
-    <script>
+    {{-- <script>
         // Function to generate a unique integer user ID
         function generateUserId() {
             return Math.floor(Math.random() * 900000) + 100000; // Random 6-digit integer
@@ -223,7 +223,7 @@
 
         // Run this function when the page loads
         window.onload = setupUserId;
-    </script>
+    </script> --}}
 
 
 

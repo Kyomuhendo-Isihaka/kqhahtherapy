@@ -19,8 +19,8 @@
         $pricings = \App\Models\Pricing::all();
         $oils = \App\Models\Product::where('category', 'oils')->get();
         $butters = \App\Models\Product::where('category', 'butters')->get();
-
-        $cartCount = \App\Models\Cart::where('user_id', request('user_id'))
+$user_id = request()->cookie('user_id');
+        $cartCount = \App\Models\Cart::where('user_id', $user_id)
     ->where('cart_status', 'ordered')
     ->count();
     @endphp

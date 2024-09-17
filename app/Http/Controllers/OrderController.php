@@ -31,6 +31,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
+        $user_id = request()->cookie('user_id');
         // Validate the request
         $request->validate([
             'shipping_address' => 'required|string|max:255',
@@ -41,12 +42,12 @@ class OrderController extends Controller
             'email' => 'nullable|email|max:255',
             'cart' => 'required|string',
             'total' => 'required|numeric',
-            'user_id' => 'required|string',
+
         ]);
 
         // // Create a new order
         $order = Order::create([
-            'user_id' => $request->user_id,
+            'user_id' => $user_id,
             'shipping_address' => $request->shipping_address,
             'city' => $request->city,
             'state' => $request->state,
@@ -70,7 +71,7 @@ class OrderController extends Controller
         }
 
         // Remove cart items for the user
-        Cart::where('user_id', $request->user_id)->delete();
+        Cart::where('user_id', $user_id)->delete();
 
         // Redirect or return response
         return redirect()->route('thankyou')->with('success', 'Order placed successfully!');

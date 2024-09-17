@@ -1,5 +1,8 @@
 @extends('layouts.app')
 
+@php
+    $user_id = request()->cookie('user_id')
+@endphp
 @section('content')
     <div class="relative min-h-screen group-data-[sidebar-size=sm]:min-h-sm">
 
@@ -42,7 +45,7 @@
                                 <form action="{{ route('cart.store') }}" method="POST">
                                     @csrf
                                     <input hidden type="number" name="product_id" value="{{ $product->id }}">
-                                    <input  hidden type="number" name="user_id" value="{{  request('user_id') }}">
+                                    <input   type="number" name="user_id" value="{{  $user_id}}">
 
 
                                     @if ($product->category == 'shirts')
@@ -126,7 +129,7 @@
                                                                     <tr>
                                                                         <td>
                                                                             <input  type="radio" name="price"
-                                                                                value="{{ $pricing->price }}" />
+                                                                                value="{{ $pricing->price }}" required>
                                                                         </td>
                                                                         <td>{{ $pricing->milliliters }}</td>
                                                                         <td>${{ $pricing->price }}</td>

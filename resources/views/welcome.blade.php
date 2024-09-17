@@ -17,7 +17,7 @@
                 <div class="grid grid-cols-1 2xl:grid-cols-12 gap-x-5 ">
 
 
-                    <div class="2xl:col-span-9">
+<div class="2xl:col-span-9">
                         <div class="flex flex-wrap items-center gap-2">
                             <h4 class="grow text-center">Explore Our Products</h4>
 

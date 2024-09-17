@@ -28,7 +28,7 @@
                     <div class="grid grid-cols-1 xl:grid-cols-12 gap-x-5">
 
 
-                        <input type="hidden" name="user_id" value="{{ request('user_id') }}" required>
+                        <input type="hidden" name="user_id" value="{{ request()->cookie('user_id') }}" required>
                         <input type="hidden" name="cart" value="{{ json_encode($cart) }}" required>
                         <input type="hidden" name="total" value="{{ $total }}">
                         <div class="xl:col-span-8">

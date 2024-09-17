@@ -45,7 +45,7 @@
                                                         <input type="number" name="product_id" value="{{ $ct->id }}"
                                                             hidden>
                                                         <input type="number" name="user_id"
-                                                            value="{{ request('user_id') }}" hidden>
+                                                            value="{{ request()->cookie('user_id') }}" hidden>
                                                         <input type="hidden" name="action" value="decrease">
                                                         <button type="submit"
                                                             class="border w-7 leading-[15px] minus-value bg-slate-200 dark:bg-zink-600 dark:border-zink-600 rounded transition-all duration-200 ease-linear border-slate-200 text-slate-500 dark:text-zink-200 hover:bg-custom-500 dark:hover:bg-custom-500 hover:text-custom-50 dark:hover:text-custom-50 hover:border-custom-500 dark:hover:border-custom-500 focus:bg-custom-500 dark:focus:bg-custom-500 focus:border-custom-500 dark:focus:border-custom-500 focus:text-custom-50 dark:focus:text-custom-50"><i
@@ -63,7 +63,7 @@
                                                         <input type="number" name="product_id" value="{{ $ct->id }}"
                                                             hidden>
                                                         <input type="number" name="user_id"
-                                                            value="{{ request('user_id') }}" hidden>
+                                                            value="{{ request()->cookie('user_id') }}" hidden>
                                                         <input class="cart-plus-minus-box" type="hidden" name="qtybutton"
                                                             value="1" />
                                                         <button type="submit"
@@ -76,7 +76,7 @@
                                                 </div>
                                                 <div>
                                                     @php
-                                                        $user_id = request('user_id');
+                                                        $user_id = request()->cookie('user_id');
                                                     @endphp
                                                     <a href="{{ route('cart.delete', ['product_id' => $ct->id, 'user_id' => $user_id]) }}"
                                                         class="text-red-400"><i data-lucide="trash-2"></i></a>
