@@ -45,7 +45,7 @@
                                 <form action="{{ route('cart.store') }}" method="POST">
                                     @csrf
                                     <input hidden type="number" name="product_id" value="{{ $product->id }}">
-                                    <input   type="number" name="user_id" value="{{  $user_id}}">
+                                    <input hidden  type="number" name="user_id" value="{{  $user_id}}">
 
 
                                     @if ($product->category == 'shirts')
