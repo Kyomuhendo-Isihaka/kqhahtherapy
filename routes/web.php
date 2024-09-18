@@ -68,6 +68,8 @@ Route::group( ['prefix' => 'admin', 'middleware'=>['auth']],function () {
         });
         Route::controller(ProfileController::class)->group(function () {
             Route::get('/profile', 'index')->name('profile');
+            Route::post('/update-profile','update')->name('profile.update');
+
         });
 
 
