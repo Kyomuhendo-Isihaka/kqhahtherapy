@@ -2,10 +2,9 @@
 
 
 @section('content')
-
     <div class="relative min-h-screen group-data-[sidebar-size=sm]:min-h-sm">
         <img src="{{ asset('uploads/kqha_baner.jpg') }}" alt=""
-        style=" width: 100%;
+            style=" width: 100%;
     background-size: cover;
     background-position: center; margin-top:100px;">
         <div
@@ -17,7 +16,7 @@
                 <div class="grid grid-cols-1 2xl:grid-cols-12 gap-x-5 ">
 
 
-<div class="2xl:col-span-9">
+                    <div class="2xl:col-span-9">
                         <div class="flex flex-wrap items-center gap-2">
                             <h4 class="grow text-center">Explore Our Products</h4>
 
@@ -73,11 +72,12 @@
                                 </div>
                             @endforeach
 
-                            {{ $products->links('components.pagination') }}
 
                         </div>
 
+
                     </div>
+                    {{ $products->links('components.pagination') }}
                 </div>
                 <!--end grid-->
 
