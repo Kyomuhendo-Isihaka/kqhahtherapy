@@ -13,10 +13,107 @@
             <div class="container-fluid group-data-[content=boxed]:max-w-boxed mx-auto">
 
 
-                <div class="grid grid-cols-1 2xl:grid-cols-12 gap-x-5 ">
 
 
-                    <div class="2xl:col-span-9">
+
+
+
+
+                <div class=" grid grid-cols-1 2xl:grid-cols-12 gap-x-5 ">
+
+                    <div class="swiper-container container  mt-5">
+                        <div class="swiper-wrapper">
+                            <!-- Card 1 -->
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <img src="{{ asset('uploads/image11.jpeg') }}" alt="" style="height: 200px">
+                                    <div class="card-body text-center">
+                                        <div class="w3-dropdown-click">
+                                            <a onclick="toggleDropdown('dropdownContentOils')"
+                                                class="p-2 w-25  text-center text-dark bg-app"
+                                                style="text-decoration: none">
+                                                Oils <i class="fa fa-chevron-down"></i>
+                                            </a>
+                                            <div id="dropdownContentOils"
+                                                class="w3-dropdown-content w3-bar-block w3-border">
+                                                @foreach ($products as $product)
+                                                    @if ($product->category == "oils")
+                                                        <a href="{{ route('product.details', $product->id) }}">{{ $product->name }}</a><br>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="swiper-slide">
+                                <div class="card">
+                                    <img src="{{ asset('uploads/butter.jpeg') }}" alt="" style="height: 200px">
+                                    <div class="card-body text-center">
+                                        <div class="w3-dropdown-click">
+                                            <a onclick="toggleDropdown('dropdownContentButters')"
+                                                class="p-2 w-25  text-center text-dark bg-app"
+                                                style="text-decoration: none">
+                                                Butters<i class="fa fa-chevron-down"></i>
+                                            </a>
+                                            <div id="dropdownContentButters"
+                                                class="w3-dropdown-content w3-bar-block w3-border">
+                                                @foreach ($products as $product)
+                                                    @if ($product->category == "butters")
+                                                        <a href="{{ route('product.details', $product->id) }}">{{ $product->name }}</a><br>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="swiper-slide">
+                                <div class="card">
+
+                                    <img src="{{ asset('uploads/shirt_red.jpg') }}" alt="" style="height: 200px">
+                                    <div class="card-body text-center">
+                                        <div class="w3-dropdown-click">
+                                            <a onclick="toggleDropdown('dropdownContentShirts')"
+                                                class="p-2 w-25  text-center text-dark bg-app"
+                                                style="text-decoration: none">
+                                                Shirts <i class="fa fa-chevron-down"></i>
+                                            </a>
+                                            <div id="dropdownContentShirts"
+                                                class="w3-dropdown-content w3-bar-block w3-border">
+                                                @foreach ($products as $product)
+                                                    @if ($product->category == "shirts")
+                                                        <a href="{{ route('product.details', $product->id) }}">{{ $product->name }}</a><br>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Add Navigation Buttons -->
+                        {{-- <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div> --}}
+
+                        <!-- Add Pagination -->
+                        {{-- <div class="swiper-pagination"></div> --}}
+                    </div>
+                    {{--
+                    <div class="container grid grid-cols-1 mt-5 md:grid-cols-3 [&.gridView]:grid-cols-1 xl:grid-cols-3 group [&.gridView]:xl:grid-cols-1 gap-x-5"
+                        id="cardGridView"> --}}
+
+
+                    {{-- </div> --}}
+
+
+
+                    <div class="2xl:col-span-9 mt-5">
                         <div class="flex flex-wrap items-center gap-2">
                             <h4 class="grow text-center">Explore Our Products</h4>
 

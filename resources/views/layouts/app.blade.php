@@ -17,6 +17,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
 </head>
 
 <body
@@ -139,6 +141,8 @@
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 
 
 
@@ -172,6 +176,58 @@
 
         // Display the formatted date range
         document.getElementById('event-date').textContent = formatDateRange(startDate, endDate);
+    </script>
+
+<script>
+    function toggleDropdown(dropdownId) {
+        var dropdown = document.getElementById(dropdownId);
+
+        if (dropdown.classList.contains('show')) {
+            dropdown.classList.remove('show');
+            dropdown.style.maxHeight = null; // Reset max-height
+        } else {
+            dropdown.classList.add('show');
+            dropdown.style.maxHeight = dropdown.scrollHeight + "100px"; // Set max-height to the content's height
+        }
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const swiperSlides = document.querySelectorAll('.swiper-slide').length;
+    const swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        loop: swiperSlides > 3,  // Enable loop only if there are more than 3 slides
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        autoplay: {
+            delay: 3000,  // Delay between slides (in milliseconds)
+            disableOnInteraction: false,  // Continue autoplay after user interactions
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+            },
+            768: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            1024: {
+                slidesPerView: 3,
+                spaceBetween: 30,
+            },
+        },
+    });
+});
+
+
     </script>
 
     {{-- <script>
