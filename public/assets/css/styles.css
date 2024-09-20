@@ -42,7 +42,7 @@
 .swiper-container {
     width: 100%;
     max-width: 100vw;
-    overflow-y: auto;
+    overflow: auto;
 
 
 }
