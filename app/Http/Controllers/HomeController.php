@@ -57,4 +57,8 @@ class HomeController extends Controller
     public function thankyou(){
         return view('pages.thankyou');
     }
+
+    public function scanCode($orderId){
+        return view('pages.scanCode',['orderId'=>$orderId]);
+    }
 }
