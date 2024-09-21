@@ -47,11 +47,13 @@ Route::controller(HomeController::class)->group(function () {
     Route::get('/{category}/products', 'products')->name('products.category');
     Route::get('/products/{product}', 'productDetails')->name('product.details');
     Route::get('/checkout', 'checkout')->name('checkout');
+    Route::get('/scan-code/{orderId}', 'scanCode')->name('scanCode');
     Route::get('/thankyou', 'thankyou')->name('thankyou');
 
 });
 
 Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
+Route::post('/save-transaction-id', [OrderController::class, 'storeTransactionID'])->name('customer.transactionID');
 
 Route::controller(CartController::class)->group(function () {
     Route::get('/cart', 'index')->name('cart');

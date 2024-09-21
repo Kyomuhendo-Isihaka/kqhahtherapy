@@ -74,6 +74,18 @@ class OrderController extends Controller
         Cart::where('user_id', $user_id)->delete();
 
         // Redirect or return response
+        // return redirect()->route('thankyou')->with('success', 'Order placed successfully!');
+        return redirect()->route('scanCode',['orderId'=>$order->id])->with('success', 'Order placed successfully!');
+    }
+
+    public function storeTransactionID(Request $request){
+        $transId = $request->input('transaction_id');
+        $orderId = $request->input('order_id');
+
+        Order::where('id',$orderId)->update([
+            "transaction_id" => $transId
+        ]);
+
         return redirect()->route('thankyou')->with('success', 'Order placed successfully!');
     }
 
