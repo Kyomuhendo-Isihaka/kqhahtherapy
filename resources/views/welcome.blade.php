@@ -2,6 +2,79 @@
 
 
 @section('content')
+    <style>
+        .w3-dropdown-content {
+            z-index: 9999;
+            position: absolute;
+            background-color: white;
+            max-height: 300px;
+            overflow-y: auto;
+            width: 200px;
+            padding: 5px;
+
+        }
+
+
+        .w3-dropdown-content::-webkit-scrollbar {
+            width: 8px;
+
+        }
+
+        .w3-dropdown-content::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+
+        }
+
+        .w3-dropdown-content::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+
+        }
+
+        .product-container:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown-button:hover+.dropdown-content {
+            display: block;
+
+        }
+
+        .swiper-container {
+            width: 100%;
+            max-width: 100vw;
+            overflow: auto;
+
+
+        }
+
+
+        .swiper-slide {
+            flex: 0 0 auto;
+            width: auto;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+
+        .w3-dropdown-content {
+            display: none;
+            /* Initially hide the dropdown */
+            max-height: 0;
+            /* Start with no height */
+            overflow: hidden;
+            /* Hide overflowing content */
+            transition: max-height 0.3s ease-out;
+            /* Transition for height */
+        }
+
+        .w3-dropdown-content.show {
+            display: block;
+            /* Show the dropdown */
+            max-height: 100px;
+            /* Set a max height (adjust as needed) */
+        }
+    </style>
     <div class="relative min-h-screen group-data-[sidebar-size=sm]:min-h-sm">
         <img src="{{ asset('uploads/kqha_baner.jpg') }}" alt=""
             style=" width: 100%;
@@ -14,14 +87,98 @@
 
 
 
+                <div class="swiper-container container  mt-5">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="{{ asset('uploads/image11.jpeg') }}" alt="" style="height: 200px">
+                                <div class="card-body text-center">
+                                    <div class="w3-dropdown-click">
+                                        <a onclick="toggleDropdown('dropdownContentOils')"
+                                            class="p-2 w-25  text-center text-dark bg-app" style="text-decoration: none">
+                                            Oils <i class="fa fa-chevron-down"></i>
+                                        </a>
+                                        <div id="dropdownContentOils" class="w3-dropdown-content w3-bar-block w3-border">
+                                            @foreach ($products as $product)
+                                                @if ($product->category == 'oils')
+                                                    <a href="{{ route('product.details', $product->id) }}"
+                                                        class="nav-link text-dark">{{ $product->name }}</a>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+
+                        <div class="swiper-slide">
+                            <div class="card">
+                                <img src="{{ asset('uploads/butter.jpeg') }}" alt="" style="height: 200px">
+                                <div class="card-body text-center">
+                                    <div class="w3-dropdown-click">
+                                        <a onclick="toggleDropdown('dropdownContentButters')"
+                                            class="p-2 w-25  text-center text-dark bg-app" style="text-decoration: none">
+                                            Butters<i class="fa fa-chevron-down"></i>
+                                        </a>
+                                        <div id="dropdownContentButters" class="w3-dropdown-content w3-bar-block w3-border">
+                                            @foreach ($products as $product)
+                                                @if ($product->category == 'butters')
+                                                    <a
+                                                        href="{{ route('product.details', $product->id) }}"class="nav-link text-dark">{{ $product->name }}</a>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="swiper-slide">
+                            <div class="card">
+
+                                <img src="{{ asset('uploads/shirt_red.jpg') }}" alt="" style="height: 200px">
+                                <div class="card-body text-center">
+                                    <div class="w3-dropdown-click">
+                                        <a onclick="toggleDropdown('dropdownContentShirts')"
+                                            class="p-2 w-25  text-center text-dark bg-app" style="text-decoration: none">
+                                            Shirts <i class="fa fa-chevron-down"></i>
+                                        </a>
+                                        <div id="dropdownContentShirts" class="w3-dropdown-content w3-bar-block w3-border">
+                                            @foreach ($products as $product)
+                                                @if ($product->category == 'shirts')
+                                                    <a href="{{ route('product.details', $product->id) }}"
+                                                        class="nav-link text-dark">{{ $product->name }}</a>
+                                                @endif
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Navigation Buttons -->
+                    {{-- <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div> --}}
+
+                    <!-- Add Pagination -->
+                    {{-- <div class="swiper-pagination"></div> --}}
+                </div>
+                {{--
+                <div class="container grid grid-cols-1 mt-5 md:grid-cols-3 [&.gridView]:grid-cols-1 xl:grid-cols-3 group [&.gridView]:xl:grid-cols-1 gap-x-5"
+                    id="cardGridView"> --}}
+
+
+                {{-- </div> --}}
 
 
 
 
                 <div class=" grid grid-cols-1 2xl:grid-cols-12 gap-x-5 ">
 
-                    
+
 
 
 
